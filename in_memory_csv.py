@@ -1,24 +1,23 @@
+import csv
+
+
 class InMemoryCsv:
 
     @staticmethod
-    def load(input_file, delimiter=";", encapsulated_in="\"", new_line="\n", row_filter=None):
-        with open(input_file, "r", errors='ignore') as csv:
+    def load(input_file, delimiter=";", encapsulated_in="\"", row_filter=None):
+        with open(input_file) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=delimiter, quotechar=encapsulated_in)
             instance = InMemoryCsv()
-            instance.keys = InMemoryCsv._split_csv_line(next(csv), delimiter, encapsulated_in, new_line)
+            instance.keys = next(csv_reader)
 
-            for line in csv:
-                values = InMemoryCsv._split_csv_line(line, delimiter, encapsulated_in, new_line)
+            for line in csv_reader:
                 row = {}
                 for i in range(len(instance.keys)):
-                    row[instance.keys[i]] = values[i]
+                    row[instance.keys[i]] = line[i]
 
                 if row_filter and not row_filter(row):
                     continue
-                instance._values.append(values)
-
-    @staticmethod
-    def _split_csv_line(line, delimiter, encapsulated_in, new_line):
-        return line.replace(encapsulated_in, "").replace(new_line, "").split(delimiter)
+                instance._values.append(line)
 
     def __init__(self):
         self.keys = []

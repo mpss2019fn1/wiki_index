@@ -2,7 +2,7 @@ class InMemoryCsv:
 
     @staticmethod
     def load(input_file, delimiter=";", encapsulated_in="\"", new_line="\n", row_filter=None):
-        with open(input_file, "r") as csv:
+        with open(input_file, "r", errors='ignore') as csv:
             instance = InMemoryCsv()
             instance.keys = InMemoryCsv._split_csv_line(next(csv), delimiter, encapsulated_in, new_line)
 

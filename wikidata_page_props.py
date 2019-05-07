@@ -33,4 +33,12 @@ class WikidataPageProps:
             return WikidataPageProps.__instance
 
     def __init__(self, in_memory_csv):
-        self._in_memory_csv = in_memory_csv
+        self._mapping = {}
+        self._build_mapping(in_memory_csv)
+
+    def _build_mapping(self, in_memory_csv):
+        for row in in_memory_csv.rows():
+            self._mapping[int(row["pp_page"])] = row["pp_value"]
+
+    def wikidata_id(self, wikipedia_page_id):
+        return self._mapping[wikipedia_page_id]

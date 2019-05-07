@@ -42,3 +42,6 @@ class WikidataPageProps:
 
     def wikidata_id(self, wikipedia_page_id):
         return self._mapping[wikipedia_page_id]
+
+    def __contains__(self, wikipedia_page_id):
+        return wikipedia_page_id in self._mapping

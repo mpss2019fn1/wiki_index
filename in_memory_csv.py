@@ -5,7 +5,7 @@ class InMemoryCsv:
 
     @staticmethod
     def load(input_file, delimiter=";", encapsulated_in="\"", row_filter=None):
-        with open(input_file) as csv_file:
+        with open(input_file, errors='replace') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=delimiter, quotechar=encapsulated_in)
             instance = InMemoryCsv()
             instance.keys = next(csv_reader)

@@ -1,7 +1,7 @@
 import threading
 
-from .exceptions import AlreadyLoadedException, NotYetLoadedException
-from .in_memory_csv import InMemoryCsv
+from exceptions import AlreadyLoadedException, NotYetLoadedException
+from in_memory_csv import InMemoryCsv
 
 
 class WikidataPageProps:
@@ -38,7 +38,9 @@ class WikidataPageProps:
 
     def _build_mapping(self, in_memory_csv):
         for row in in_memory_csv.rows():
-            self._mapping[int(row["pp_page"])] = row["pp_value"]
+            hex_string = row["pp_value"]
+            byte_array = bytearray.fromhex(hex_string)
+            self._mapping[int(row["pp_page"])] = byte_array.decode("utf-8")
 
     def wikidata_id(self, wikipedia_page_id):
         return self._mapping[wikipedia_page_id]

@@ -19,6 +19,8 @@ class InMemoryCsv:
                     continue
                 instance._values.append(line)
 
+            return instance
+
     def __init__(self):
         self.keys = []
         self._values = []

@@ -1,7 +1,7 @@
 import threading
 
-from exceptions import AlreadyLoadedException, NotYetLoadedException
-from in_memory_csv import InMemoryCsv
+from .exceptions import AlreadyLoadedException, NotYetLoadedException
+from .in_memory_csv import InMemoryCsv
 
 
 class WikidataPageProps:

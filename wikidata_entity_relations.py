@@ -15,7 +15,7 @@ class WikidataEntityRelations:
             if WikidataEntityRelations.__instance:
                 raise AlreadyLoadedException()
 
-            in_memory_csv = InMemoryCsv.load(csv)
+            in_memory_csv = InMemoryCsv.load(csv, delimiter=",", encapsulated_in="")
             WikidataEntityRelations.__instance = WikidataEntityRelations(in_memory_csv)
             return WikidataEntityRelations.__instance
 

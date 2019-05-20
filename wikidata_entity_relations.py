@@ -39,7 +39,8 @@ class WikidataEntityRelations:
             self._mapping[row["source"]].append({row["name"]: row["value"]})
 
     def relations(self, wikidata_entity_id):
-        return self._mapping[wikidata_entity_id]
+        return [{"source": wikidata_entity_id, "name": row["name"], "value": row["value"]} for row in
+                self._mapping[wikidata_entity_id]]
 
     def __contains__(self, wikidata_entity_id):
         return wikidata_entity_id in self._mapping

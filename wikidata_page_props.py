@@ -14,8 +14,7 @@ class WikidataPageProps:
             if WikidataPageProps.__instance:
                 raise AlreadyLoadedException()
 
-            in_memory_csv = InMemoryCsv.load(csv, delimiter=";", encapsulated_in="\"",
-                                             row_filter=WikidataPageProps._row_filter)
+            in_memory_csv = InMemoryCsv.load(csv, delimiter=";", row_filter=WikidataPageProps._row_filter)
             WikidataPageProps.__instance = WikidataPageProps(in_memory_csv)
             return WikidataPageProps.__instance
 

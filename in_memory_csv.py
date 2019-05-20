@@ -22,7 +22,7 @@ class InMemoryCsv:
             return instance
 
     @staticmethod
-    def _remove_encapsulation(value, encapsulated_in="\""):
+    def _remove_encapsulation(value, encapsulated_in=None):
         if not encapsulated_in:
             return value
 

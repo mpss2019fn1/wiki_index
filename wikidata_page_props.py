@@ -13,7 +13,7 @@ class WikidataPageProps:
     def initialize_instance_from_csv(csv):
         with WikidataPageProps.__instance_lock:
             if WikidataPageProps.__instance:
-                raise AlreadyLoadedException
+                raise AlreadyLoadedException()
 
             in_memory_csv = InMemoryCsv.load(csv, row_filter=WikidataPageProps._row_filter)
             WikidataPageProps.__instance = WikidataPageProps(in_memory_csv)
@@ -28,7 +28,7 @@ class WikidataPageProps:
     def instance():
         with WikidataPageProps.__instance_lock:
             if not WikidataPageProps.__instance:
-                raise NotYetLoadedException
+                raise NotYetLoadedException()
 
             return WikidataPageProps.__instance
 

@@ -27,7 +27,13 @@ class InMemoryCsv:
             return value
 
         length = len(encapsulated_in)
-        return value[length: len(value) - length]
+        if value.startswith(encapsulated_in):
+            value = value[length:]
+
+        if value.endswith(encapsulated_in):
+            value = value[:-length]
+
+        return value
 
     def __init__(self):
         self.keys = []
